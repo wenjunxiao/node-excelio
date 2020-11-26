@@ -1,0 +1,16 @@
+{
+  "name": "excelio",
+  "version": "0.0.9",
+  "description": "excel io utils",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Wenjun Xiao",
+  "license": "ISC",
+  "dependencies": {
+    "iconv-lite": "^0.4.17",
+    "lodash": "^4.17.4",
+    "xlsx-style": "^0.8.13"
+  }
+}
