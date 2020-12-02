@@ -1,6 +1,6 @@
 {
-  "name": "excelio",
-  "version": "0.0.9",
+  "name": "node-excelio",
+  "version": "1.0.0",
   "description": "excel io utils",
   "main": "index.js",
   "scripts": {
