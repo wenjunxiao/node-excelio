@@ -1,13 +1,21 @@
 {
   "name": "node-excelio",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "excel io utils",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Wenjun Xiao",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wenjunxiao/node-excelio.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wenjunxiao/node-excelio/issues"
+  },
+  "homepage": "https://github.com/wenjunxiao/node-excelio#readme",
   "dependencies": {
     "iconv-lite": "^0.4.17",
     "lodash": "^4.17.4",
