@@ -343,7 +343,7 @@ top-level attributes: `fill`, `font`, `numFmt`, `alignment`, and `border`. æ›´å¤
 
 
 | Style Attribute | Sub Attributes | Values |
-| :-------------- | :------------- | :------------- |
+:-|:-|:-
 | fill            | patternType    |  `"solid"` or `"none"`  |
 |                 | fgColor        |  `COLOR_SPEC`           |        
 |                 | bgColor        |  `COLOR_SPEC`           |
