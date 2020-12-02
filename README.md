@@ -343,42 +343,42 @@ top-level attributes: `fill`, `font`, `numFmt`, `alignment`, and `border`. æ›´å¤
 
 
 | Style Attribute | Sub Attributes | Values |
-| :-------------- | :------------- | :------------- | :----- |
-| fill            | patternType    |  `"solid"` or `"none"` |
-|                 | fgColor        |  `COLOR_SPEC`
-|                 | bgColor        |  `COLOR_SPEC`
-| font            | name           |  `"Calibri"` // default
-|                 | sz             |  `"11"` // font size in points
-|                 | color          |  `COLOR_SPEC`
-|                 | bold           |  `true` or `false`
-|                 | underline      |  `true` or `false`
-|                 | italic         |  `true` or `false`
-|                 | strike         |  `true` or `false`
-|                 | outline        |  `true` or `false`
-|                 | shadow         |  `true` or `false`
-|                 | vertAlign      |  `true` or `false`
-| numFmt          |                |  `"0"`  // integer index to built in formats, see StyleBuilder.SSF property
-|                 |                |  `"0.00%"` // string matching a built-in format, see StyleBuilder.SSF
-|                 |                |  `"0.0%"`  // string specifying a custom format
-|                 |                |  `"0.00%;\\(0.00%\\);\\-;@"` // string specifying a custom format, escaping special characters
-|                 |                |  `"m/dd/yy"` // string a date format using Excel's format notation
-| alignment       | vertical       | `"bottom"` or `"center"` or `"top"`
-|                 | horizontal     | `"bottom"` or `"center"` or `"top"`
-|                 | wrapText       |  `true \ false`
-|                 | readingOrder   |  `2` // for right-to-left
-|                 | textRotation   | Number from `0` to `180` or `255` (default is `0`)
-|                 |                |  `90` is rotated up 90 degrees
-|                 |                |  `45` is rotated up 45 degrees
-|                 |                | `135` is rotated down 45 degrees 
-|                 |                | `180` is rotated down 180 degrees
-|                 |                | `255` is special,  aligned vertically
-| border          | top            | `{ style: BORDER_STYLE, color: COLOR_SPEC }`
-|                 | bottom         | `{ style: BORDER_STYLE, color: COLOR_SPEC }`
-|                 | left           | `{ style: BORDER_STYLE, color: COLOR_SPEC }`
-|                 | right          | `{ style: BORDER_STYLE, color: COLOR_SPEC }`
-|                 | diagonal       | `{ style: BORDER_STYLE, color: COLOR_SPEC }`
-|                 | diagonalUp     | `true` or `false`
-|                 | diagonalDown   | `true` or `false`
+| :-------------- | :------------- | :------------- |
+| fill            | patternType    |  `"solid"` or `"none"`  |
+|                 | fgColor        |  `COLOR_SPEC`           |        
+|                 | bgColor        |  `COLOR_SPEC`           |
+| font            | name           |  `"Calibri"` // default |
+|                 | sz             |  `"11"` // font size in points |
+|                 | color          |  `COLOR_SPEC`        |
+|                 | bold           |  `true` or `false` |
+|                 | underline      |  `true` or `false` |
+|                 | italic         |  `true` or `false` |
+|                 | strike         |  `true` or `false` |
+|                 | outline        |  `true` or `false` |
+|                 | shadow         |  `true` or `false` |
+|                 | vertAlign      |  `true` or `false` |
+| numFmt          |                |  `"0"`  // integer index to built in formats, see StyleBuilder.SSF property |
+|                 |                |  `"0.00%"` // string matching a built-in format, see StyleBuilder.SSF |
+|                 |                |  `"0.0%"`  // string specifying a custom format |
+|                 |                |  `"0.00%;\\(0.00%\\);\\-;@"` // string specifying a custom format, escaping special characters |
+|                 |                |  `"m/dd/yy"` // string a date format using Excel's format notation |
+| alignment       | vertical       | `"bottom"` or `"center"` or `"top"` |
+|                 | horizontal     | `"bottom"` or `"center"` or `"top"` |
+|                 | wrapText       |  `true \ false` |
+|                 | readingOrder   |  `2` // for right-to-left |
+|                 | textRotation   | Number from `0` to `180` or `255` (default is `0`) |
+|                 |                |  `90` is rotated up 90 degrees |
+|                 |                |  `45` is rotated up 45 degrees |
+|                 |                | `135` is rotated down 45 degrees | 
+|                 |                | `180` is rotated down 180 degrees |
+|                 |                | `255` is special,  aligned vertically |
+| border          | top            | `{ style: BORDER_STYLE, color: COLOR_SPEC }` |
+|                 | bottom         | `{ style: BORDER_STYLE, color: COLOR_SPEC }` |
+|                 | left           | `{ style: BORDER_STYLE, color: COLOR_SPEC }` |
+|                 | right          | `{ style: BORDER_STYLE, color: COLOR_SPEC }` |
+|                 | diagonal       | `{ style: BORDER_STYLE, color: COLOR_SPEC }` |
+|                 | diagonalUp     | `true` or `false` |
+|                 | diagonalDown   | `true` or `false` |
 
 
 **COLOR_SPEC**: Colors for `fill`, `font`, and `border` are specified as objects, either:
