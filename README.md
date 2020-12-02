@@ -40,7 +40,8 @@ let writer = new ExcelWrite({})
 ```
   支持一下选项
 * `alignment` 默认对齐方式,`{horizontal: 'left',vertical: 'left'}`
-* `px` 宽度是否使用像素值，如果是则传入的宽度都必须是像素，否则传入的宽度的是指字符数
+* `px` 宽度是否使用像素值，如果`true`则传入的宽度都必须是像素，否则传入的宽度的是指字符数(注意中文)
+* `fontSize` 默认字体大小
 * `width` 默认宽度（像素还是字符数，取决于`px`）
 * `minWidth` 最小宽度（像素还是字符数，取决于`px`）
 * `NaN` 数字列为空时的表示符号，比如`-`
@@ -414,8 +415,8 @@ const ExcelIO = require('excelio');
 const writer = ExcelIO.createWriter();
 writer.withoutGridLines().sheet('Test Sheet');
 const tables = {
-  'table 1': [['1-01', '1-02'], ['1-11', '1-12']],
-  'table 2': [['2-01', '2-02'], ['2-11', '2-12']],
+  'table 1': [['1-01', '1-02', '1-03', '1-04'], ['1-11', '1-12', '1-13', '1-14']],
+  'table 2': [['2-01', '2-02', '2-03', '2-04'], ['2-11', '2-12', '2-13', '2-14']],
 };
 Object.keys(tables).forEach((table, i)=>{
   let cell = i * 3 + 1;
@@ -423,9 +424,10 @@ Object.keys(tables).forEach((table, i)=>{
   tables[table].forEach(data=>{
     let row = writer.rowIndex() + 2;
     writer.skipRow()
-      .width(150, cell).width(150, cell + 1)
+      .width(5, cell).width(5, cell + 1)
       .row(cell).cell(data[0]).cell(data[1])
-      .border(row, cell, writer.rowIndex(), cell + 1, '000000')
+      .row(cell).cell(data[2]).cell(data[3])
+      .border(row, cell, writer.rowIndex(), cell + 1, '#000000')
   })
 });
 

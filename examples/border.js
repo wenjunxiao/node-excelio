@@ -11,9 +11,9 @@ const titleOpts = {
   }
 };
 writer.withoutGridLines().sheet('Single').row()
-  .row(1).cell('Title1', titleOpts).width(100)
-  .cell('Title2', titleOpts).width(120)
-  .cell('Title3', titleOpts).width(120);
+  .row(1).cell('Title1', titleOpts).width(10)
+  .cell('Title2', titleOpts).width(12)
+  .cell('Title3', titleOpts).width(12);
 
 const data = [{
     v1: 11,
@@ -35,12 +35,14 @@ const data = [{
 for (let d of data) {
   writer.row(1).cell(d.v1).currency(d.v2, '$').number(d.v3)
 }
-writer.border2end(1, 1, '000000', 'thin', {
+writer.border2end(1, 1, '#9bd6c4', 'thick', {
   // outer: true,
-  outer: {
-    style: 'thick',
-    color: '9bd6c4'
-  },
-  // inner: true
+  // outer: {
+  //   style: 'thick',
+  //   color: '#9bd6c4'
+  // },
+  inner: false
 });
-writer.save(path.resolve(__dirname, 'border.xlsx'));
+const filename = path.resolve(__dirname, 'border.xlsx');
+writer.save(filename);
+console.log('saved =>', filename);

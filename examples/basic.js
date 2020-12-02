@@ -27,7 +27,11 @@ writer.withoutGridLines().sheet('Basic')
   .cell('ABCDEFGHIJKLMNOPQRSTUVWXYZ', titleOpts).width(26)
   .cell('中文', titleOpts).chWidth(2)
   .cell('中文字', titleOpts).chWidth(3)
+  .cell('自动计算宽度', titleOpts)
+  .cell('Auto Width', titleOpts)
 ;
 
 writer.border2end(0, 0);
-writer.save(path.resolve(__dirname, 'basic.xlsx'));
+const filename = path.resolve(__dirname, 'basic.xlsx');
+writer.save(filename);
+console.log('saved =>', filename);

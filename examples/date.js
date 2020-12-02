@@ -12,10 +12,10 @@ const titleOpts = {
 };
 const moment = require('moment')
 writer.withoutGridLines().sheet('Date')
-  .row().cell('utc', titleOpts).width(160)
-  .cell('expect', titleOpts).width(160)
-  .cell('date', titleOpts).width(160)
-  .cell('expect', titleOpts).width(160);
+  .row().cell('utc', titleOpts).width(16)
+  .cell('expect', titleOpts).width(16)
+  .cell('date', titleOpts).width(16)
+  .cell('expect', titleOpts).width(16);
 
 // 数据库存储值：2019-07-31 07:18:00
 // 北京日期对象：2019-07-30T23:18:00.000Z
@@ -56,5 +56,7 @@ writer.utc('2018-01-01 23:16:00').cell(process.env.TZ === 'UTC' ? '2018-01-01 23
 writer.row()
 writer.date(d, 'YYYY-MM-DD HH:mm:ss').cell(process.env.TZ === 'UTC' ? '2018-01-01 15:16:00' : '2018-01-01 23:16:00')
 writer.date('2018-01-01 23:16:00').cell('2018-01-01 23:16:00')
-writer.border2end(0, 0, '000000');
-writer.save(path.resolve(__dirname, 'date.xlsx'));
+writer.border2end(0, 0, '#000000');
+const filename = path.resolve(__dirname, 'date.xlsx');
+writer.save(filename);
+console.log('saved =>', filename);

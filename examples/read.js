@@ -13,14 +13,14 @@ const titleOpts = {
 
 const moment = require('moment')
 writer.withoutGridLines().sheet('Date')
-  .row().cell('UTC时间', titleOpts).width(160)
-  .cell('当地时间', titleOpts).width(160);
+  .row().cell('UTC时间', titleOpts).width(16)
+  .cell('当地时间', titleOpts).width(16);
 const date = new Date()
 writer
   .row().utc(date).date(date)
   .row().cell('2019-11-26 07:10:41').cell('2019-11-26 15:10:41')
 
-
+console.log('date =>', date);
 const reader = Excel.createReader({});
 reader.read(writer.build({ type: 'buffer' }))
 reader.sheet(0).header({
@@ -29,15 +29,14 @@ reader.sheet(0).header({
 });
 const result = reader.map(v => {
   if (v && v.date) {
-    console.log(v)
-    v.utc_ = moment.utc(v.utc).format('YYYY-MM-DD HH:mm:ss');
-    v.utc_local = moment(v.utc).format('YYYY-MM-DD HH:mm:ss');
-    v.date_ = moment(v.date).format('YYYY-MM-DD HH:mm:ss');
-    v.utc_hours = v.utc.getHours();
+    v.utc_time = moment.utc(v.utc).format('YYYY-MM-DD HH:mm:ss');
+    v.utc2local = moment(v.utc).format('YYYY-MM-DD HH:mm:ss');
+    v.date_time = moment(v.date).format('YYYY-MM-DD HH:mm:ss');
+    v.utc_hours = v.utc.getUTCHours();
     v.date_hours = v.date.getHours();
     return v;
   }
   return null;
 });
 
-console.log(result)
+console.log(JSON.stringify(result, null, 2));

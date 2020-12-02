@@ -12,9 +12,9 @@ const titleOpts = {
 };
 ['Test1', 'Test2', 'Test3'].map((name, i) => {
   const sheet = writer.newSheet(name);
-  sheet.row().cell(name + 'Title1', titleOpts).width(100)
-    .cell(name + 'Title2', titleOpts).width(120)
-    .cell(name + 'Title3', titleOpts).width(120);
+  sheet.row().cell(name + 'Title1', titleOpts).width(10)
+    .cell(name + 'Title2', titleOpts).width(12)
+    .cell(name + 'Title3', titleOpts).width(12);
   const data = [{
       v1: 11 + i * 1000,
       v2: 12 + i * 1000,
@@ -34,7 +34,9 @@ const titleOpts = {
   for (let d of data) {
     sheet.row().cell(d.v1).currency(d.v2, '$').number(d.v3)
   }
-  sheet.border2end(0, 0, '000000');
+  sheet.border2end(0, 0, '#000000');
 })
 writer.withoutGridLines()
-writer.save(path.resolve(__dirname, 'multiple.xlsx'));
+const filename = path.resolve(__dirname, 'multiple.xlsx');
+writer.save(filename);
+console.log('saved =>', filename);
