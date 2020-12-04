@@ -293,11 +293,12 @@ writer.border(0, 0, 10, 10, '000000', 'thin', {
 
   指定当前操作的sheet页，可以是sheetName，也可以是指定的序号
 
-#### `header(titles, opts)`
+#### `header(titles, opts, mapper)`
 
   跳转到指定标题
 * `titles` 必须的标题转换规则
 * `opts` 可选的标题转换规则
+* `mapper` 重复标题时的映射关系
 
   转换规则
 ```js
