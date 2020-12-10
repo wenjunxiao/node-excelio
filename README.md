@@ -45,6 +45,7 @@ let writer = new ExcelWrite({})
 * `width` 默认宽度（像素还是字符数，取决于`px`）
 * `minWidth` 最小宽度（像素还是字符数，取决于`px`）
 * `NaN` 数字列为空时的表示符号，比如`-`
+* `undefined` 字段为`undefined`时的值，默认空
 * `showGridLines` 是否显示表格线
 * `titleLine` 标题行行号，比如`0`
 * `titleOpts` 标题行的默认选项，`title()`时使用或者指定`titleLine`了之后匹配的行时使用
@@ -289,9 +290,13 @@ writer.border(0, 0, 10, 10, '000000', 'thin', {
 
   返回所有Sheet页的数组
 
-#### `sheet(name|index)`
+#### `active(name|index)`
 
   指定当前操作的sheet页，可以是sheetName，也可以是指定的序号
+
+#### `sheet(name|index)`
+
+  返回指定Sheet页的Reader
 
 #### `header(titles, opts, mapper)`
 
@@ -303,8 +308,8 @@ writer.border(0, 0, 10, 10, '000000', 'thin', {
   转换规则
 ```js
 {
-  "字段": "表格中的标题", // 不指定数据类型
-  "时间": ["表格中的标题", "date"] // 指定数据类型
+  "表格中的标题1": "字段1", // 不指定数据类型
+  "表格中的标题2": ["字段2", "date"] // 指定数据类型
 }
 ```
   支持指定的类型如下:
@@ -457,7 +462,7 @@ const binary = writer.build();
 const reader = new ExcelReader()
 
 reader.readFile('file.xlsx');
-reader.sheet(0).header({
+reader.active(0).header({
   '日期': ['date', 'date'],
   '描述': 'description',
 }, {

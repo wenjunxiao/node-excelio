@@ -123,6 +123,10 @@ declare namespace ExcelIO {
      */
     NaN?: string;
     /**
+     * 字段为`undefined`时的值
+     */
+    undefined?: string;
+    /**
      * 是否显示表格线
      */
     showGridLines?: boolean;
@@ -315,6 +319,10 @@ declare namespace ExcelIO {
      * @param format 单元格格式
      */
     cell (v: any, options?: CellOptions, type?: string, format?: string): this;
+    /**
+     * 当前单元格文本换行
+     */
+    wrap (): this;
     /**
      * 按照中文方式设置单元格宽度
      * @param width 中文字数或者像素值
@@ -530,6 +538,10 @@ declare namespace ExcelIO {
      */
     cell (v: any, options?: CellOptions, type?: string, format?: string): this;
     /**
+     * 当前单元格文本换行
+     */
+    wrap (): this;
+    /**
      * 按照中文方式设置单元格宽度
      * @param width 中文字数或者像素值
      * @param {number} [colIndex = -1] 指定列，默认当前列
@@ -618,28 +630,9 @@ declare namespace ExcelIO {
    */
   function createWriter (options?: ExcelOption): ExcelWriter;
 
-  interface ExcelReader {
+  interface SheetReader {
     /**
-     * 从文件读入数据
-     * @param filename 文件
-     */
-    readFile (filename?: string): this;
-    /**
-     * 从文件内容读取数据
-     * @param {Buffer|String} data 数据
-     */
-    read (data: string | Buffer): this;
-    /**
-     * 获取所有Sheet的名字
-     */
-    sheetNames (): string[];
-    /**
-     * 切换到指定的Sheet
-     * @param name 名字
-     */
-    sheet (name?: string): this;
-    /**
-     * 获取当前行的数据
+     * 获取当前行的原始数据
      */
     row (): any[];
     /**
@@ -649,8 +642,8 @@ declare namespace ExcelIO {
      * @param {function(name, i)} mapper 重复标题时的映射关系
      * @example titles
      * `{
-        "字段": "表格中的标题", // 不指定数据类型
-        "时间": ["表格中的标题", "date"] // 指定数据类型
+        "表格中的标题1": "字段1", // 不指定数据类型
+        "表格中的标题2": ["字段2", "date"] // 指定数据类型
       }`
      * @example mapper
      `const mapper = (name, i) => {
@@ -673,9 +666,92 @@ declare namespace ExcelIO {
     has (title: string): boolean;
     /**
      * 每一行数据的处理，默认返回当前行数据
-     * @param fn 处理函数
+     * @param {function(any[]|object)} fn 处理函数
      */
     map (fn: function): any[];
+    /**
+     * 是否有下一行数据
+     */
+    hasNext (): boolean;
+    /**
+     * 下一行数据，如果没有指定`header()`，则返回下一行原始数据，同`row()`;
+     * 如果指定了`header()`，则返回下一行数据对象
+     */
+    next (): any[] | object;
+  }
+
+  interface ExcelReader {
+    /**
+     * 从文件读入数据
+     * @param filename 文件
+     */
+    readFile (filename?: string): this;
+    /**
+     * 从文件内容读取数据
+     * @param {Buffer|String} data 数据
+     */
+    read (data: string | Buffer): this;
+    /**
+     * 获取所有Sheet的名字
+     */
+    sheetNames (): string[];
+    /**
+     * 切换到指定的Sheet
+     * @param name 名字或者索引
+     */
+    active (name: string | number): this;
+    /**
+     * 返回指定Sheet的Reader
+     * @param name 名字或者索引
+     */
+    sheet (name: string | number): SheetReader;
+    /**
+     * 获取当前行的原始数据
+     */
+    row (): any[];
+    /**
+     * 映射标题和字段的关联关系
+     * @param titles 必须字段标题映射关系
+     * @param opts 可选字段标题映射关系
+     * @param {function(name, i)} mapper 重复标题时的映射关系
+     * @example titles
+     * `{
+        "表格中的标题1": "字段1", // 不指定数据类型
+        "表格中的标题2": ["字段2", "date"] // 指定数据类型
+      }`
+     * @example mapper
+     `const mapper = (name, i) => {
+        switch (name) {
+          case '分类':
+            if (i === 1) {
+              return '一级分类';
+            } else if (i === 2) {
+              return '二级分类';
+            }
+            break;
+        }
+      };`
+     */
+    header (titles: object, opts?: object, mapper?: function): this;
+    /**
+     * 是否存在标题
+     * @param title 标题
+     */
+    has (title: string): boolean;
+    /**
+     * 每一行数据的处理，默认返回当前行数据
+     * @param {function(any[]|object)} fn 处理函数
+     */
+    map (fn: function): any[];
+    /**
+     * 是否有下一行数据
+     */
+    hasNext (): boolean;
+    /**
+     * 下一行数据，如果没有指定`header()`，则返回下一行原始数据，同`row()`;
+     * 如果指定了`header()`，则返回下一行数据对象
+     */
+    next (): any[] | object;
   }
   interface ReaderOption {
     /**

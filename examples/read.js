@@ -23,7 +23,7 @@ writer
 console.log('date =>', date);
 const reader = Excel.createReader({});
 reader.read(writer.build({ type: 'buffer' }))
-reader.sheet(0).header({
+reader.active(0).header({
   'UTC时间': ['utc', 'utc'],
   '当地时间': ['date', 'date']
 });
