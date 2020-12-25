@@ -1,3 +1,5 @@
+import { string } from "xlsx-style/jszip";
+
 declare namespace ExcelIO {
   /**
    * 边框风格
@@ -288,6 +290,12 @@ declare namespace ExcelIO {
      */
     percent (v: any, precision?: number, options?: CellOptions): this;
     /**
+     * 对当前列进行汇总
+     * @param options 单元格选项
+     * @param start 开始行，默认为1，表示第一行是头，数据从第二行开始
+     */
+    sum (options?: CellOptions, start?: number): this;
+    /**
      * 在当前行设置标题
      * @param vs 标题数组
      * @param options 单元格选项
@@ -506,6 +514,12 @@ declare namespace ExcelIO {
      */
     percent (v: any, precision?: number, options?: CellOptions): this;
     /**
+     * 对当前列进行汇总
+     * @param options 单元格选项
+     * @param start 开始行，默认为1，表示第一行是头，数据从第二行开始
+     */
+    sum (options?: CellOptions, start?: number): this;
+    /**
      * 在当前行设置标题
      * @param vs 标题数组
      * @param options 单元格选项
@@ -660,6 +674,15 @@ declare namespace ExcelIO {
      */
     header (titles: object, opts?: object, mapper?: function): this;
     /**
+     * 
+     * @param lables 用来识别汇总行的标签数组
+     */
+    tailor (lables: any[]): this;
+    /**
+     * 重新开始读取数据
+     */
+    reset (): this;
+    /**
      * 是否存在标题
      * @param title 标题
      */
@@ -733,6 +756,15 @@ declare namespace ExcelIO {
       };`
      */
     header (titles: object, opts?: object, mapper?: function): this;
+    /**
+     * 
+     * @param lables 用来识别汇总行的标签数组
+     */
+    tailor (lables: any[]): this;
+    /**
+     * 重新开始读取数据
+     */
+    reset (): this;
     /**
      * 是否存在标题
      * @param title 标题
